@@ -1,14 +1,18 @@
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, LogIn, UserPlus } from 'lucide-react';
 import Logo from './Logo';
 import { Button } from '@/components/ui/button';
-import { useToast } from '@/components/ui/use-toast';
+import { Link } from 'react-router-dom';
+import { auth } from '@/lib/firebaseConfig';
+import { onAuthStateChanged } from 'firebase/auth';
+import AuthModal from './auth/AuthModal';
+import Logout from './auth/Logout';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { toast } = useToast();
+  const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,24 +24,17 @@ const Navbar = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    
+    // Subscribe to auth state changes
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      unsubscribe();
+    };
   }, []);
-
-  const handleSignIn = () => {
-    toast({
-      title: "Sign In Feature",
-      description: "User authentication feature is coming soon. Please check back later.",
-      duration: 3000,
-    });
-  };
-
-  const handleSignUp = () => {
-    toast({
-      title: "Sign Up Feature",
-      description: "Account creation feature is coming soon. Please check back later.",
-      duration: 3000,
-    });
-  };
 
   const navLinks = [
     { name: 'Home', href: '#hero' },
@@ -73,21 +70,46 @@ const Navbar = () => {
                   </a>
                 </li>
               ))}
+              <li>
+                <Link 
+                  to="/auth" 
+                  className="px-3 py-2 text-sm text-gray-300 hover:text-white transition-colors duration-300"
+                >
+                  Authentication
+                </Link>
+              </li>
             </ul>
             <div className="flex items-center gap-2 ml-4">
-              <Button 
-                variant="outline" 
-                className="border-primary/30 hover:border-primary/60"
-                onClick={handleSignIn}
-              >
-                Sign In
-              </Button>
-              <Button 
-                className="purple-gradient purple-gradient-hover"
-                onClick={handleSignUp}
-              >
-                Get Started
-              </Button>
+              {user ? (
+                <>
+                  <span className="text-sm text-gray-300 mr-2">Hi, {user.email.split('@')[0]}</span>
+                  <Logout />
+                </>
+              ) : (
+                <>
+                  <AuthModal 
+                    triggerContent={
+                      <Button 
+                        variant="outline" 
+                        className="border-primary/30 hover:border-primary/60"
+                      >
+                        <LogIn className="w-4 h-4 mr-2" />
+                        Sign In
+                      </Button>
+                    }
+                    defaultTab="login"
+                  />
+                  <AuthModal 
+                    triggerContent={
+                      <Button className="purple-gradient purple-gradient-hover">
+                        <UserPlus className="w-4 h-4 mr-2" />
+                        Get Started
+                      </Button>
+                    }
+                    defaultTab="signup"
+                  />
+                </>
+              )}
             </div>
           </div>
           
@@ -118,20 +140,44 @@ const Navbar = () => {
                 {link.name}
               </a>
             ))}
+            <Link
+              to="/auth"
+              className="block px-3 py-2 text-base text-gray-300 hover:text-white hover:bg-primary/10 rounded-md"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Authentication
+            </Link>
             <div className="flex flex-col gap-2 pt-2">
-              <Button 
-                variant="outline" 
-                className="w-full justify-center border-primary/30 hover:border-primary/60"
-                onClick={handleSignIn}
-              >
-                Sign In
-              </Button>
-              <Button 
-                className="w-full justify-center purple-gradient purple-gradient-hover"
-                onClick={handleSignUp}
-              >
-                Get Started
-              </Button>
+              {user ? (
+                <>
+                  <span className="px-3 py-2 text-sm text-gray-300">Hi, {user.email.split('@')[0]}</span>
+                  <Logout />
+                </>
+              ) : (
+                <>
+                  <AuthModal 
+                    triggerContent={
+                      <Button 
+                        variant="outline" 
+                        className="w-full justify-center border-primary/30 hover:border-primary/60"
+                      >
+                        <LogIn className="w-4 h-4 mr-2" />
+                        Sign In
+                      </Button>
+                    }
+                    defaultTab="login"
+                  />
+                  <AuthModal 
+                    triggerContent={
+                      <Button className="w-full justify-center purple-gradient purple-gradient-hover">
+                        <UserPlus className="w-4 h-4 mr-2" />
+                        Get Started
+                      </Button>
+                    }
+                    defaultTab="signup"
+                  />
+                </>
+              )}
             </div>
           </div>
         </div>
