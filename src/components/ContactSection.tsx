@@ -1,10 +1,12 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import { Loader2 } from 'lucide-react';
+import emailjs from 'emailjs-com';
 
 const ContactSection = () => {
+  const form = useRef<HTMLFormElement>(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -12,27 +14,6 @@ const ContactSection = () => {
   });
   
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isEmailJSLoaded, setIsEmailJSLoaded] = useState(false);
-
-  useEffect(() => {
-    // Load EmailJS script
-    const script = document.createElement('script');
-    script.src = 'https://cdn.emailjs.com/dist/email.min.js';
-    script.async = true;
-    script.onload = () => {
-      // Initialize EmailJS with your public key
-      (window as any).emailjs.init('wcuRMdDZE9hoUHAdA');
-      setIsEmailJSLoaded(true);
-    };
-    document.body.appendChild(script);
-
-    return () => {
-      // Clean up
-      if (document.body.contains(script)) {
-        document.body.removeChild(script);
-      }
-    };
-  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -43,24 +24,27 @@ const ContactSection = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    if (!isEmailJSLoaded) {
-      toast.error("Email service is not loaded yet. Please try again.");
+    if (!form.current) {
+      toast.error("Form reference not available. Please try again.");
       setIsSubmitting(false);
       return;
     }
 
-    // Send email using EmailJS
-    (window as any).emailjs.sendForm(
-      'service_gvqcjaw', 
-      'template_dcke26q', 
-      e.target as HTMLFormElement
+    // Use the emailjs-com library instead of the CDN version
+    emailjs.sendForm(
+      'service_gvqcjaw', // Your Service ID
+      'template_dcke26q', // Your Template ID
+      form.current,
+      'wcuRMdDZE9hoUHAdA' // Your Public Key
     )
-      .then(() => {
+      .then((response) => {
+        console.log('Email sent successfully:', response);
         toast.success("Message sent successfully! We'll get back to you soon.");
         setFormData({ name: '', email: '', message: '' });
+        form.current?.reset();
         setIsSubmitting(false);
       })
-      .catch((error: any) => {
+      .catch((error) => {
         console.error('EmailJS error:', error);
         toast.error("Failed to send message. Please try again later.");
         setIsSubmitting(false);
@@ -84,7 +68,7 @@ const ContactSection = () => {
         </div>
         
         <div className="max-w-3xl mx-auto glass-morphism rounded-xl p-8">
-          <form id="contact-form" onSubmit={handleSubmit}>
+          <form id="contact-form" ref={form} onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
