@@ -3,10 +3,12 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import Logo from './Logo';
 import { Button } from '@/components/ui/button';
+import { useToast } from '@/components/ui/use-toast';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { toast } = useToast();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,6 +22,22 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleSignIn = () => {
+    toast({
+      title: "Sign In Feature",
+      description: "User authentication feature is coming soon. Please check back later.",
+      duration: 3000,
+    });
+  };
+
+  const handleSignUp = () => {
+    toast({
+      title: "Sign Up Feature",
+      description: "Account creation feature is coming soon. Please check back later.",
+      duration: 3000,
+    });
+  };
 
   const navLinks = [
     { name: 'Home', href: '#hero' },
@@ -57,10 +75,17 @@ const Navbar = () => {
               ))}
             </ul>
             <div className="flex items-center gap-2 ml-4">
-              <Button variant="outline" className="border-primary/30 hover:border-primary/60">
+              <Button 
+                variant="outline" 
+                className="border-primary/30 hover:border-primary/60"
+                onClick={handleSignIn}
+              >
                 Sign In
               </Button>
-              <Button className="purple-gradient purple-gradient-hover">
+              <Button 
+                className="purple-gradient purple-gradient-hover"
+                onClick={handleSignUp}
+              >
                 Get Started
               </Button>
             </div>
@@ -94,10 +119,17 @@ const Navbar = () => {
               </a>
             ))}
             <div className="flex flex-col gap-2 pt-2">
-              <Button variant="outline" className="w-full justify-center border-primary/30 hover:border-primary/60">
+              <Button 
+                variant="outline" 
+                className="w-full justify-center border-primary/30 hover:border-primary/60"
+                onClick={handleSignIn}
+              >
                 Sign In
               </Button>
-              <Button className="w-full justify-center purple-gradient purple-gradient-hover">
+              <Button 
+                className="w-full justify-center purple-gradient purple-gradient-hover"
+                onClick={handleSignUp}
+              >
                 Get Started
               </Button>
             </div>
