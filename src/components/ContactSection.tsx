@@ -1,7 +1,8 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
+import { Loader2 } from 'lucide-react';
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +12,27 @@ const ContactSection = () => {
   });
   
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isEmailJSLoaded, setIsEmailJSLoaded] = useState(false);
+
+  useEffect(() => {
+    // Load EmailJS script
+    const script = document.createElement('script');
+    script.src = 'https://cdn.emailjs.com/dist/email.min.js';
+    script.async = true;
+    script.onload = () => {
+      // Initialize EmailJS with your public key
+      (window as any).emailjs.init('wcuRMdDZE9hoUHAdA');
+      setIsEmailJSLoaded(true);
+    };
+    document.body.appendChild(script);
+
+    return () => {
+      // Clean up
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
+      }
+    };
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -21,12 +43,28 @@ const ContactSection = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate API call
-    setTimeout(() => {
-      toast.success("Message sent successfully! We'll get back to you soon.");
-      setFormData({ name: '', email: '', message: '' });
+    if (!isEmailJSLoaded) {
+      toast.error("Email service is not loaded yet. Please try again.");
       setIsSubmitting(false);
-    }, 1500);
+      return;
+    }
+
+    // Send email using EmailJS
+    (window as any).emailjs.sendForm(
+      'service_gvqcjaw', 
+      'template_dcke26q', 
+      e.target as HTMLFormElement
+    )
+      .then(() => {
+        toast.success("Message sent successfully! We'll get back to you soon.");
+        setFormData({ name: '', email: '', message: '' });
+        setIsSubmitting(false);
+      })
+      .catch((error: any) => {
+        console.error('EmailJS error:', error);
+        toast.error("Failed to send message. Please try again later.");
+        setIsSubmitting(false);
+      });
   };
 
   return (
@@ -46,7 +84,7 @@ const ContactSection = () => {
         </div>
         
         <div className="max-w-3xl mx-auto glass-morphism rounded-xl p-8">
-          <form onSubmit={handleSubmit}>
+          <form id="contact-form" onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
@@ -100,7 +138,14 @@ const ContactSection = () => {
                 className="purple-gradient purple-gradient-hover px-8 py-6 text-white font-medium"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? 'Sending...' : 'Send Message'}
+                {isSubmitting ? (
+                  <>
+                    <Loader2 size={18} className="animate-spin mr-2" />
+                    Sending...
+                  </>
+                ) : (
+                  'Send Message'
+                )}
               </Button>
             </div>
           </form>
