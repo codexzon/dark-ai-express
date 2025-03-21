@@ -4,39 +4,39 @@ import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
 
 const testimonials = [
   {
-    content: "This AI tool has completely transformed our content creation process. We're now producing high-quality articles in half the time it used to take us.",
+    content: "RNP IT SOLUTION transformed our online presence with a stunning website and effective digital marketing strategy. Our conversion rates have increased by 65% in just three months!",
     author: "Sarah Johnson",
-    role: "Marketing Director",
+    role: "Marketing Director, TechFirm",
     avatar: "https://randomuser.me/api/portraits/women/1.jpg"
   },
   {
-    content: "The code generation features have saved our development team countless hours. The suggestions are incredibly accurate and easily customizable.",
+    content: "The mobile app they developed for our business has received excellent feedback from users. Their attention to detail and focus on user experience is unmatched in the industry.",
     author: "Michael Chen",
-    role: "Lead Developer",
+    role: "CEO, AppSolutions Inc.",
     avatar: "https://randomuser.me/api/portraits/men/2.jpg"
   },
   {
-    content: "As a startup founder, this tool has been invaluable. It's like having an extra team member who's always available to help with various tasks.",
+    content: "We saw a 300% ROI on our Facebook and Meta ad campaigns managed by RNP IT SOLUTION. Their targeting strategies and ad creatives are exceptional!",
     author: "Emma Rodriguez",
-    role: "CEO, TechStart",
+    role: "Founder, GrowthBrand",
     avatar: "https://randomuser.me/api/portraits/women/3.jpg"
   },
   {
-    content: "I was skeptical about AI tools, but this one exceeded my expectations. The learning curve is minimal, and the results are outstanding.",
+    content: "The AI chatbot they created for our customer service has reduced our response time by 80% and improved customer satisfaction scores dramatically.",
     author: "David Wilson",
-    role: "Content Strategist",
+    role: "Customer Service Manager, ServicePro",
     avatar: "https://randomuser.me/api/portraits/men/4.jpg"
   },
   {
-    content: "We've been able to scale our operations significantly thanks to the automation capabilities. Our customers are happier, and so is our team.",
+    content: "RNP IT SOLUTION's social media management has grown our following by 10k+ in just two months. Their content is engaging and their strategy is clearly working!",
     author: "Lisa Thompson",
-    role: "Operations Manager",
+    role: "Social Media Director, FashionRetail",
     avatar: "https://randomuser.me/api/portraits/women/5.jpg"
   },
   {
-    content: "The customer support team is exceptional. They're quick to respond and always go above and beyond to ensure we're getting the most out of the platform.",
+    content: "The UI/UX design work they did on our web application has significantly reduced user drop-off rates and increased the average time users spend on our platform.",
     author: "Robert Garcia",
-    role: "Customer Success",
+    role: "Product Manager, DataViz",
     avatar: "https://randomuser.me/api/portraits/men/6.jpg"
   }
 ];
@@ -68,10 +68,10 @@ const TestimonialsSection = () => {
       <div className="container px-4 sm:px-6 lg:px-8 mx-auto relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 heading-gradient">
-            What Our Users Say
+            Client Success Stories
           </h2>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-            Don't just take our word for it. Here's what our customers have to say about our AI solution.
+            See what our clients have to say about our services and the results we've helped them achieve.
           </p>
         </div>
         

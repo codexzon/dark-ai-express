@@ -44,20 +44,20 @@ const HeroSection = () => {
       <div className="container relative z-10 px-4 sm:px-6 lg:px-8 mx-auto">
         <div className="max-w-4xl mx-auto text-center">
           <div className="mb-6 inline-block py-1 px-3 rounded-full bg-primary/10 border border-primary/20">
-            <p className="text-sm font-medium text-primary">AI-Powered Solution</p>
+            <p className="text-sm font-medium text-primary">Digital Agency & IT Services</p>
           </div>
           <h1 className="heading-gradient text-4xl md:text-6xl font-bold leading-tight mb-6 tracking-tight animate-fade-in">
-            OpenAI + Next.js SaaS<br />Boilerplate and Starter Kit
+            Transform Your Business<br />With Digital Excellence
           </h1>
           <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto animate-fade-in opacity-90">
-            A fully-featured boilerplate for building production-ready AI applications, powered by OpenAI and Next.js, with authentication, billing, and more.
+            RNP IT SOLUTION delivers cutting-edge web development, app creation, digital marketing, and AI solutions to help your business thrive in the digital landscape.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in">
             <Button size="lg" className="purple-gradient purple-gradient-hover text-white font-medium px-6 py-6 rounded-lg">
-              Get Started
+              Get Free Consultation
             </Button>
             <Button variant="outline" size="lg" className="gap-2 font-medium border-primary/30 hover:border-primary/60 px-6 py-6 rounded-lg">
-              View Demo <ArrowRight size={16} />
+              View Our Work <ArrowRight size={16} />
             </Button>
           </div>
           

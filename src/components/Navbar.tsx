@@ -23,12 +23,13 @@ const Navbar = () => {
 
   const navLinks = [
     { name: 'Home', href: '#hero' },
-    { name: 'Features', href: '#features' },
-    { name: 'Business', href: '#business' },
-    { name: 'Pricing', href: '#pricing' },
+    { name: 'About', href: '#about' },
+    { name: 'Services', href: '#services' },
+    { name: 'Portfolio', href: '#portfolio' },
     { name: 'Testimonials', href: '#testimonials' },
     { name: 'Blog', href: '#blog' },
     { name: 'Contact', href: '#contact' },
+    { name: 'FAQ', href: '#faq' },
   ];
 
   return (
@@ -60,7 +61,7 @@ const Navbar = () => {
                 Sign In
               </Button>
               <Button className="purple-gradient purple-gradient-hover">
-                Sign Up
+                Get Started
               </Button>
             </div>
           </div>
@@ -97,7 +98,7 @@ const Navbar = () => {
                 Sign In
               </Button>
               <Button className="w-full justify-center purple-gradient purple-gradient-hover">
-                Sign Up
+                Get Started
               </Button>
             </div>
           </div>

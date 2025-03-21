@@ -1,7 +1,8 @@
 
 import React from 'react';
 import Logo from './Logo';
-import { Facebook, Twitter, Instagram, Linkedin, Github } from 'lucide-react';
+import { Facebook, Twitter, Instagram, Linkedin, Github, Mail, Send } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -13,7 +14,7 @@ const Footer = () => {
           <div>
             <Logo className="mb-6" />
             <p className="text-gray-400 mb-6">
-              Building the future of AI-powered applications. Simplifying complex workflows with automation and intelligence.
+              Empowering businesses with innovative digital solutions. We combine technology and creativity to deliver exceptional results.
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-gray-400 hover:text-primary transition-colors">
@@ -35,9 +36,9 @@ const Footer = () => {
           </div>
           
           <div>
-            <h4 className="font-semibold text-lg mb-4">Product</h4>
+            <h4 className="font-semibold text-lg mb-4">Services</h4>
             <ul className="space-y-3">
-              {['Features', 'Pricing', 'API', 'Documentation', 'Release Notes'].map((item, i) => (
+              {['Web Development', 'App Development', 'Digital Marketing', 'AI Solutions', 'UI/UX Design', 'Content Creation'].map((item, i) => (
                 <li key={i}>
                   <a href="#" className="text-gray-400 hover:text-white transition-colors">
                     {item}
@@ -50,7 +51,7 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold text-lg mb-4">Company</h4>
             <ul className="space-y-3">
-              {['About Us', 'Blog', 'Careers', 'Customers', 'Partners'].map((item, i) => (
+              {['About Us', 'Our Work', 'Testimonials', 'Blog', 'Careers', 'Contact Us'].map((item, i) => (
                 <li key={i}>
                   <a href="#" className="text-gray-400 hover:text-white transition-colors">
                     {item}
@@ -61,22 +62,24 @@ const Footer = () => {
           </div>
           
           <div>
-            <h4 className="font-semibold text-lg mb-4">Resources</h4>
-            <ul className="space-y-3">
-              {['Community', 'Contact', 'Help Center', 'Terms of Service', 'Privacy Policy'].map((item, i) => (
-                <li key={i}>
-                  <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
+            <h4 className="font-semibold text-lg mb-4">Newsletter</h4>
+            <p className="text-gray-400 mb-4">Subscribe to our newsletter for the latest updates and insights.</p>
+            <div className="flex">
+              <input
+                type="email"
+                placeholder="Your email"
+                className="flex-1 bg-black/20 border border-white/10 rounded-l-lg px-4 py-2 text-white focus:outline-none focus:ring-1 focus:ring-primary"
+              />
+              <Button className="purple-gradient purple-gradient-hover rounded-l-none">
+                <Send size={18} />
+              </Button>
+            </div>
           </div>
         </div>
         
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center">
           <div className="text-gray-400 mb-4 md:mb-0">
-            © {currentYear} AI Tool. All rights reserved.
+            © {currentYear} RNP IT SOLUTION. All rights reserved.
           </div>
           <div className="flex flex-wrap gap-6">
             <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">

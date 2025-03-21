@@ -10,6 +10,8 @@ import BlogSection from '@/components/BlogSection';
 import ContactSection from '@/components/ContactSection';
 import CtaSection from '@/components/CtaSection';
 import Footer from '@/components/Footer';
+import FaqSection from '@/components/FaqSection';
+import PortfolioSection from '@/components/PortfolioSection';
 
 const Index = () => {
   useEffect(() => {
@@ -39,10 +41,12 @@ const Index = () => {
       <Navbar />
       <main>
         <HeroSection />
-        <FeaturesSection />
         <BusinessSection />
-        <PricingSection />
+        <FeaturesSection />
+        <PortfolioSection />
         <TestimonialsSection />
+        <PricingSection />
+        <FaqSection />
         <BlogSection />
         <ContactSection />
         <CtaSection />

@@ -6,22 +6,22 @@ import { Button } from '@/components/ui/button';
 const BlogSection = () => {
   const blogPosts = [
     {
-      title: "Getting Started with AI Prompting",
-      excerpt: "Learn the fundamentals of crafting effective prompts to get the most out of AI models.",
+      title: "5 Ways AI Can Transform Your Customer Service",
+      excerpt: "Discover how AI chatbots and agents can revolutionize your customer support and increase satisfaction.",
       image: "https://images.unsplash.com/photo-1677442135198-21d94daca0d0?q=80&w=2832&auto=format&fit=crop",
       date: "June 12, 2023",
       readTime: "5 min read"
     },
     {
-      title: "The Future of AI in Business",
-      excerpt: "Explore how artificial intelligence is transforming industries and creating new opportunities.",
+      title: "The Ultimate Guide to Facebook & Meta Advertising",
+      excerpt: "Learn the insider strategies that can maximize your ROI and reach on Facebook and Meta platforms.",
       image: "https://images.unsplash.com/photo-1684469749275-91e0dc566473?q=80&w=2832&auto=format&fit=crop",
       date: "July 23, 2023",
       readTime: "8 min read"
     },
     {
-      title: "Integrating AI with Next.js Applications",
-      excerpt: "A step-by-step guide to implementing AI capabilities in your Next.js web applications.",
+      title: "Why Responsive Web Design is Essential in 2023",
+      excerpt: "Explore the importance of mobile-first design and how it impacts your conversion rates and SEO ranking.",
       image: "https://images.unsplash.com/photo-1655720033654-a4239dd42d10?q=80&w=2832&auto=format&fit=crop",
       date: "August 5, 2023",
       readTime: "10 min read"
@@ -37,10 +37,10 @@ const BlogSection = () => {
       <div className="container px-4 sm:px-6 lg:px-8 mx-auto relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 heading-gradient">
-            Latest Blogs & News
+            Insights & Resources
           </h2>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-            Stay updated with the latest trends, tips, and insights about AI and technology.
+            Expert advice, industry trends, and actionable tips to help you stay ahead in the digital world.
           </p>
         </div>
         
