@@ -1,39 +1,42 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 260 25% 9%;
+    --background: 220 10% 8%;
     --foreground: 210 40% 98%;
 
-    --card: 260 25% 11%;
+    --card: 220 10% 10%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 260 25% 11%;
+    --popover: 220 10% 10%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 252 87% 63%;
+    --primary: 258 90% 66%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 260 25% 14%;
+    --secondary: 220 10% 12%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 260 25% 14%;
+    --muted: 220 10% 12%;
     --muted-foreground: 217.9 10.6% 64.9%;
 
-    --accent: 260 25% 14%;
+    --accent: 220 10% 12%;
     --accent-foreground: 210 40% 98%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 260 25% 15%;
-    --input: 260 25% 15%;
-    --ring: 252 87% 63%;
+    --border: 220 10% 14%;
+    --input: 220 10% 14%;
+    --ring: 258 90% 66%;
 
-    --radius: 0.75rem;
+    --radius: 0.5rem;
   }
 }
 
@@ -44,7 +47,13 @@
   
   body {
     @apply bg-background text-foreground antialiased;
+    font-family: 'Space Grotesk', sans-serif;
     font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Syne', sans-serif;
+    @apply font-bold;
   }
 
   html {
@@ -87,5 +96,32 @@
   
   .card-hover {
     @apply transition-all duration-300 hover:shadow-[0_0_20px_rgba(149,97,226,0.2)] hover:-translate-y-1;
+  }
+
+  .magnetic-aura {
+    position: relative;
+  }
+  
+  .magnetic-aura::after {
+    content: '';
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    right: -15px;
+    bottom: -15px;
+    z-index: -1;
+    background: radial-gradient(circle, rgba(149,97,226,0.2) 0%, rgba(149,97,226,0) 70%);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .magnetic-aura:hover::after {
+    opacity: 1;
+  }
+
+  .text-stroke {
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+    color: transparent;
   }
 }
