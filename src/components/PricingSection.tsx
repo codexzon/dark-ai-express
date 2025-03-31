@@ -1,7 +1,7 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { MotionButton } from '@/components/ui/motion-button';
 import ScrollTrigger from './ScrollTrigger';
 import gsap from 'gsap';
 import { motion } from 'framer-motion';
@@ -15,7 +15,6 @@ const PricingSection = () => {
     const section = sectionRef.current;
     if (!section) return;
     
-    // Create GSAP animation for heading
     const timeline = gsap.timeline({
       scrollTrigger: {
         trigger: section,
@@ -41,7 +40,6 @@ const PricingSection = () => {
         duration: 0.5
       }, "-=0.3");
       
-    // Animate pricing cards
     cardsRef.current.forEach((card, index) => {
       if (!card) return;
       
@@ -59,7 +57,6 @@ const PricingSection = () => {
     });
     
     return () => {
-      // Clean up animations
       if (timeline.scrollTrigger) {
         timeline.scrollTrigger.kill();
       }
@@ -124,7 +121,6 @@ const PricingSection = () => {
 
   return (
     <section id="pricing" ref={sectionRef} className="py-24 relative overflow-hidden dark-gradient">
-      {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div 
           className="absolute bottom-0 left-0 w-full h-2/3 bg-primary/5 rounded-full blur-[100px]"
@@ -149,7 +145,6 @@ const PricingSection = () => {
             </p>
           </ScrollTrigger>
           
-          {/* Toggle */}
           <ScrollTrigger animation="scale" delay={0.4}>
             <div className="pricing-toggle flex items-center justify-center mb-8">
               <span className={`mr-3 ${!annual ? 'text-white' : 'text-gray-400'}`}>Monthly</span>
@@ -251,7 +246,7 @@ const PricingSection = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.8 + index * 0.2 }}
                 >
-                  <Button 
+                  <MotionButton 
                     className={`w-full ${
                       plan.popular 
                         ? 'purple-gradient purple-gradient-hover' 
@@ -261,7 +256,7 @@ const PricingSection = () => {
                     whileTap={{ scale: 0.95 }}
                   >
                     {plan.cta}
-                  </Button>
+                  </MotionButton>
                 </motion.div>
               </div>
             </motion.div>
