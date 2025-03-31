@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -120,10 +121,10 @@ const PricingSection = () => {
   ];
 
   return (
-    <section id="pricing" ref={sectionRef} className="py-24 relative overflow-hidden dark-gradient">
+    <section id="pricing" ref={sectionRef} className="py-32 relative overflow-hidden bg-zinc-900">
       <div className="absolute inset-0 overflow-hidden">
         <motion.div 
-          className="absolute bottom-0 left-0 w-full h-2/3 bg-primary/5 rounded-full blur-[100px]"
+          className="absolute bottom-0 left-0 w-full h-2/3 bg-zinc-800/50 rounded-full blur-[100px]"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 1 }}
@@ -132,30 +133,30 @@ const PricingSection = () => {
       </div>
       
       <div className="container px-4 sm:px-6 lg:px-8 mx-auto relative z-10">
-        <div className="text-center mb-16">
+        <div className="text-center mb-20">
           <ScrollTrigger animation="slideUp">
-            <h2 className="pricing-heading text-3xl md:text-4xl font-bold mb-4 heading-gradient">
-              Our Pricing Plan
+            <h2 className="pricing-heading text-4xl md:text-5xl font-bold mb-6 tracking-tight bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+              Choose Your Plan
             </h2>
           </ScrollTrigger>
           
           <ScrollTrigger animation="slideUp" delay={0.2}>
-            <p className="pricing-description text-lg text-gray-400 max-w-2xl mx-auto mb-8">
-              Choose the perfect web development, app development, and IT services plan for your needs. All plans include a 14-day free trial.
+            <p className="pricing-description text-lg text-zinc-400 max-w-2xl mx-auto mb-10">
+              Select the perfect plan for your business needs. All plans include dedicated support and our satisfaction guarantee.
             </p>
           </ScrollTrigger>
           
           <ScrollTrigger animation="scale" delay={0.4}>
-            <div className="pricing-toggle flex items-center justify-center mb-8">
+            <div className="pricing-toggle flex items-center justify-center mb-12">
               <span className={`mr-3 ${!annual ? 'text-white' : 'text-gray-400'}`}>Monthly</span>
               <motion.div 
-                className="relative w-14 h-7 bg-primary/20 rounded-full cursor-pointer"
+                className="relative w-14 h-7 bg-zinc-700 rounded-full cursor-pointer"
                 onClick={() => setAnnual(!annual)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 <motion.div 
-                  className="absolute top-1 w-5 h-5 rounded-full bg-primary"
+                  className="absolute top-1 w-5 h-5 rounded-full bg-white"
                   animate={{ 
                     left: annual ? '2rem' : '0.25rem',
                   }}
@@ -163,7 +164,7 @@ const PricingSection = () => {
                 ></motion.div>
               </motion.div>
               <span className={`ml-3 ${annual ? 'text-white' : 'text-gray-400'}`}>
-                Annual <span className="text-xs text-primary ml-1">Save 20%</span>
+                Annual <span className="text-xs text-white ml-1">Save 20%</span>
               </span>
             </div>
           </ScrollTrigger>
@@ -174,8 +175,8 @@ const PricingSection = () => {
             <motion.div 
               key={index}
               ref={el => cardsRef.current[index] = el}
-              className={`glass-morphism rounded-xl overflow-hidden flex flex-col ${
-                plan.popular ? 'border-primary/30 purple-glow scale-105 md:scale-110 z-10' : 'border-white/10'
+              className={`bg-zinc-800/50 backdrop-blur-md border border-zinc-700/50 rounded-xl overflow-hidden flex flex-col ${
+                plan.popular ? 'ring-1 ring-white scale-105 md:scale-110 z-10' : ''
               }`}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -191,7 +192,7 @@ const PricingSection = () => {
             >
               {plan.popular && (
                 <motion.div 
-                  className="bg-primary text-white text-center text-sm font-medium py-1"
+                  className="bg-white text-zinc-900 text-center text-sm font-medium py-1"
                   initial={{ opacity: 0, scaleX: 0 }}
                   animate={{ opacity: 1, scaleX: 1 }}
                   transition={{ delay: 0.5 }}
@@ -199,9 +200,9 @@ const PricingSection = () => {
                   Most Popular
                 </motion.div>
               )}
-              <div className="p-6 md:p-8 flex-1 flex flex-col">
+              <div className="p-8 md:p-10 flex-1 flex flex-col">
                 <motion.h3 
-                  className="text-2xl font-bold mb-2"
+                  className="text-2xl font-bold mb-2 tracking-tight"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.3 + index * 0.2 }}
@@ -209,7 +210,7 @@ const PricingSection = () => {
                   {plan.name}
                 </motion.h3>
                 <motion.p 
-                  className="text-gray-400 mb-6"
+                  className="text-zinc-400 mb-6"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.4 + index * 0.2 }}
@@ -217,15 +218,15 @@ const PricingSection = () => {
                   {plan.description}
                 </motion.p>
                 <motion.div 
-                  className="mb-6"
+                  className="mb-8"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.5 + index * 0.2 }}
                 >
-                  <span className="text-4xl font-bold">${plan.price}</span>
-                  <span className="text-gray-400">{plan.period}</span>
+                  <span className="text-5xl font-bold tracking-tight">${plan.price}</span>
+                  <span className="text-zinc-400">{plan.period}</span>
                 </motion.div>
-                <ul className="space-y-4 mb-8 flex-1">
+                <ul className="space-y-4 mb-10 flex-1">
                   {plan.features.map((feature, i) => (
                     <motion.li 
                       key={i} 
@@ -234,10 +235,10 @@ const PricingSection = () => {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.6 + i * 0.1 + index * 0.1 }}
                     >
-                      <span className="text-primary mt-0.5">
+                      <span className="text-white mt-0.5">
                         <Check size={18} />
                       </span>
-                      <span className="text-gray-300">{feature}</span>
+                      <span className="text-zinc-300">{feature}</span>
                     </motion.li>
                   ))}
                 </ul>
@@ -249,8 +250,8 @@ const PricingSection = () => {
                   <MotionButton 
                     className={`w-full ${
                       plan.popular 
-                        ? 'purple-gradient purple-gradient-hover' 
-                        : 'bg-primary/10 hover:bg-primary/20 text-white border border-primary/30'
+                        ? 'bg-white text-zinc-900 hover:bg-zinc-200' 
+                        : 'bg-zinc-700/50 hover:bg-zinc-700 text-white border border-zinc-600'
                     }`}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}

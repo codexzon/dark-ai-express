@@ -1,6 +1,6 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -8,33 +8,33 @@
 
 @layer base {
   :root {
-    --background: 220 10% 8%;
-    --foreground: 210 40% 98%;
+    --background: 0 0% 7%;
+    --foreground: 0 0% 98%;
 
-    --card: 220 10% 10%;
-    --card-foreground: 210 40% 98%;
+    --card: 0 0% 9%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 220 10% 10%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 9%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 258 90% 66%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
 
-    --secondary: 220 10% 12%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 0 0% 13%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 220 10% 12%;
-    --muted-foreground: 217.9 10.6% 64.9%;
+    --muted: 0 0% 13%;
+    --muted-foreground: 0 0% 65%;
 
-    --accent: 220 10% 12%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 0 0% 13%;
+    --accent-foreground: 0 0% 98%;
 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 220 10% 14%;
-    --input: 220 10% 14%;
-    --ring: 258 90% 66%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 0 0% 83%;
 
     --radius: 0.5rem;
   }
@@ -42,18 +42,18 @@
 
 @layer base {
   * {
-    @apply border-border selection:bg-primary/20 selection:text-foreground;
+    @apply border-border selection:bg-white/10 selection:text-white;
   }
   
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Syne', sans-serif;
-    @apply font-bold;
+    font-family: 'Inter', sans-serif;
+    @apply font-bold tracking-tight;
   }
 
   html {
@@ -63,41 +63,48 @@
 
 @layer utilities {
   .glass-morphism {
-    @apply backdrop-blur-xl bg-white/5 border border-white/10 shadow-[0_4px_12px_-2px_rgba(0,0,0,0.3)];
+    @apply backdrop-blur-md bg-zinc-800/50 border border-zinc-700/50;
   }
   
   .neo-blur {
-    @apply backdrop-blur-xl bg-black/40 border border-white/10;
+    @apply backdrop-blur-xl bg-zinc-900/80 border border-zinc-800/50;
   }
   
   .text-gradient {
-    @apply bg-gradient-to-r from-primary via-purple-400 to-purple-300 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-white to-zinc-400 bg-clip-text text-transparent;
   }
   
   .heading-gradient {
-    @apply bg-gradient-to-br from-white to-slate-300 bg-clip-text text-transparent;
-  }
-  
-  .purple-glow {
-    @apply shadow-[0_0_15px_rgba(149,97,226,0.5)];
-  }
-  
-  .purple-gradient {
-    @apply bg-gradient-to-r from-[#6c47ff] to-[#c447ff];
-  }
-  
-  .purple-gradient-hover {
-    @apply hover:bg-gradient-to-r hover:from-[#7d5aff] hover:to-[#d45aff] transition-all duration-300;
-  }
-  
-  .dark-gradient {
-    @apply bg-gradient-to-b from-background to-[#0c0613];
+    @apply bg-gradient-to-r from-white to-zinc-400 bg-clip-text text-transparent;
   }
   
   .card-hover {
-    @apply transition-all duration-300 hover:shadow-[0_0_20px_rgba(149,97,226,0.2)] hover:-translate-y-1;
+    @apply transition-all duration-300 hover:border-white/20 hover:-translate-y-1;
+  }
+  
+  .dark-gradient {
+    @apply bg-gradient-to-b from-zinc-900 to-zinc-950;
+  }
+  
+  .custom-cursor {
+    @apply fixed w-6 h-6 rounded-full bg-white opacity-70 pointer-events-none z-50 mix-blend-difference;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease;
   }
 
+  .cursor-hover {
+    @apply w-12 h-12;
+  }
+
+  .magnetic-item {
+    @apply relative transition-transform;
+  }
+
+  .text-stroke {
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+    color: transparent;
+  }
+  
   .magnetic-aura {
     position: relative;
   }
@@ -110,7 +117,7 @@
     right: -15px;
     bottom: -15px;
     z-index: -1;
-    background: radial-gradient(circle, rgba(149,97,226,0.2) 0%, rgba(149,97,226,0) 70%);
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
     border-radius: 50%;
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -119,9 +126,36 @@
   .magnetic-aura:hover::after {
     opacity: 1;
   }
+}
 
-  .text-stroke {
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
-    color: transparent;
+#root {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  overflow-x: hidden;
+}
+
+.font-mono {
+  font-family: 'Space Mono', monospace;
+}
+
+.marquee {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.marquee-content {
+  display: inline-block;
+  animation: marquee 30s linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
   }
 }

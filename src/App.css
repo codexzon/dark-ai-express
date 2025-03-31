@@ -8,12 +8,8 @@
   overflow-x: hidden;
 }
 
-.font-syne {
-  font-family: 'Syne', sans-serif;
-}
-
-.font-space {
-  font-family: 'Space Grotesk', sans-serif;
+.font-mono {
+  font-family: 'Space Mono', monospace;
 }
 
 .marquee {
@@ -35,16 +31,22 @@
   }
 }
 
-.cursor-glow {
+.cursor {
   position: fixed;
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background-color: rgba(149, 97, 226, 0.5);
+  background-color: rgba(255, 255, 255, 0.8);
   pointer-events: none;
-  mix-blend-mode: screen;
+  mix-blend-mode: difference;
   z-index: 9999;
   transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s;
+}
+
+.cursor.hover {
+  width: 60px;
+  height: 60px;
 }
 
 .parallax-wrapper {
@@ -86,4 +88,8 @@
 
 .hover-lift:hover {
   transform: translateY(-5px);
+}
+
+.text-balance {
+  text-wrap: balance;
 }
