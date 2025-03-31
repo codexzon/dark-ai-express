@@ -22,7 +22,19 @@ interface LocomotiveScrollProviderProps {
 
 export const LocomotiveScrollProvider: React.FC<LocomotiveScrollProviderProps> = ({
   children,
-  options = { smooth: true, lerp: 0.1 }
+  options = { 
+    smooth: true, 
+    lerp: 0.08,
+    smartphone: {
+      smooth: true,
+      inertia: 0.8,
+    },
+    tablet: {
+      smooth: true,
+      inertia: 0.8,
+    },
+    resetNativeScroll: true
+  }
 }) => {
   const [scroll, setScroll] = useState<LocomotiveScroll | null>(null);
   const [isReady, setIsReady] = useState(false);
@@ -38,6 +50,17 @@ export const LocomotiveScrollProvider: React.FC<LocomotiveScrollProviderProps> =
           
           setScroll(smoothScrollbar);
           setIsReady(true);
+          
+          // Add data-scroll attributes to elements for parallax
+          document.querySelectorAll('[data-scroll-speed]').forEach((element) => {
+            smoothScrollbar.on('scroll', (instance) => {
+              if (element instanceof HTMLElement) {
+                const speed = parseFloat(element.dataset.scrollSpeed || '0');
+                const y = instance.scroll.y * speed;
+                element.style.transform = `translateY(${y}px)`;
+              }
+            });
+          });
           
           // Update scroll on window resize
           window.addEventListener('resize', () => {

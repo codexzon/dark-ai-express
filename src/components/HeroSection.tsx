@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
+import ParallaxElement from './ParallaxElement';
 
 const HeroSection = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -24,6 +25,12 @@ const HeroSection = () => {
           el.style.transform = `translate(${x * 15}px, ${y * 15}px)`;
         }
       });
+      
+      // Add parallax to background grid
+      const grid = element.querySelector('.grid-pattern');
+      if (grid && grid instanceof HTMLElement) {
+        grid.style.transform = `translate(${x * 5}px, ${y * 5}px)`;
+      }
     };
 
     window.addEventListener('mousemove', handleMouseMove);
@@ -90,22 +97,29 @@ const HeroSection = () => {
       id="hero" 
       ref={heroRef} 
       className="relative min-h-screen pt-20 flex items-center justify-center overflow-hidden dark-gradient"
+      data-scroll-section
     >
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <motion.div 
-          className="glow-element absolute top-1/4 -left-20 w-64 h-64 bg-primary/20 rounded-full blur-[100px]"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.5 }}
-        ></motion.div>
-        <motion.div 
-          className="glow-element absolute bottom-1/4 -right-20 w-80 h-80 bg-purple-600/20 rounded-full blur-[120px]"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.5, delay: 0.5 }}
-        ></motion.div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxwYXR0ZXJuIGlkPSJncmlkIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiPjxwYXRoIGQ9Ik0gNDAgMCBMIDAgMCAwIDQwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1OTRkZmIxMCIgc3Ryb2tlLXdpZHRoPSIxIj48L3BhdGg+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIj48L3JlY3Q+PC9zdmc+')]"></div>
+        <ParallaxElement speed={0.05} direction="down">
+          <motion.div 
+            className="glow-element absolute top-1/4 -left-20 w-64 h-64 bg-primary/20 rounded-full blur-[100px]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.5 }}
+          ></motion.div>
+        </ParallaxElement>
+        
+        <ParallaxElement speed={0.08} direction="up">
+          <motion.div 
+            className="glow-element absolute bottom-1/4 -right-20 w-80 h-80 bg-purple-600/20 rounded-full blur-[120px]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.5, delay: 0.5 }}
+          ></motion.div>
+        </ParallaxElement>
+        
+        <div className="grid-pattern absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxwYXR0ZXJuIGlkPSJncmlkIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiPjxwYXRoIGQ9Ik0gNDAgMCBMIDAgMCAwIDQwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1OTRkZmIxMCIgc3Ryb2tlLXdpZHRoPSIxIj48L3BhdGg+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIj48L3JlY3Q+PC9zdmc+')]"></div>
       </div>
 
       {/* Content */}
@@ -120,21 +134,30 @@ const HeroSection = () => {
           <motion.div 
             className="mb-6 inline-block py-1 px-3 rounded-full bg-primary/10 border border-primary/20"
             variants={itemVariant}
+            data-scroll
+            data-scroll-speed="0.3"
           >
             <p className="text-sm font-medium text-primary">Digital Agency & IT Services</p>
           </motion.div>
+          
           <motion.h1 
             className="heading-gradient text-4xl md:text-6xl font-bold leading-tight mb-6 tracking-tight"
             variants={itemVariant}
+            data-scroll
+            data-scroll-speed="0.2"
           >
             Transform Your Business<br />With Digital Excellence
           </motion.h1>
-          <motion.p 
-            className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto opacity-90"
-            variants={itemVariant}
-          >
-            RNP IT SOLUTION delivers cutting-edge web development, app creation, digital marketing, and AI solutions to help your business thrive in the digital landscape.
-          </motion.p>
+          
+          <ParallaxElement speed={0.1} direction="up">
+            <motion.p 
+              className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto opacity-90"
+              variants={itemVariant}
+            >
+              RNP IT SOLUTION delivers cutting-edge web development, app creation, digital marketing, and AI solutions to help your business thrive in the digital landscape.
+            </motion.p>
+          </ParallaxElement>
+          
           <motion.div 
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
             variants={itemVariant}
@@ -148,30 +171,32 @@ const HeroSection = () => {
           </motion.div>
           
           {/* UI Preview */}
-          <motion.div 
-            className="mt-16 relative max-w-3xl mx-auto preview-container"
-            variants={itemVariant}
-          >
-            <div className="glass-morphism rounded-xl overflow-hidden shadow-2xl purple-glow">
-              <div className="border-b border-white/10 p-3 flex items-center">
-                <div className="flex space-x-2">
-                  <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                  <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                  <div className="w-3 h-3 rounded-full bg-green-500"></div>
+          <ParallaxElement speed={0.15} direction="up">
+            <motion.div 
+              className="mt-16 relative max-w-3xl mx-auto preview-container"
+              variants={itemVariant}
+            >
+              <div className="glass-morphism rounded-xl overflow-hidden shadow-2xl purple-glow">
+                <div className="border-b border-white/10 p-3 flex items-center">
+                  <div className="flex space-x-2">
+                    <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                  </div>
                 </div>
-              </div>
-              <div className="p-4 bg-black/20">
-                <div className="flex flex-col gap-3">
-                  <div className="h-8 w-full bg-white/5 rounded animate-pulse"></div>
-                  <div className="h-24 w-full bg-white/5 rounded"></div>
-                  <div className="flex gap-2">
-                    <div className="h-8 w-1/3 bg-white/5 rounded"></div>
-                    <div className="h-8 w-1/3 bg-primary/20 rounded"></div>
+                <div className="p-4 bg-black/20">
+                  <div className="flex flex-col gap-3">
+                    <div className="h-8 w-full bg-white/5 rounded animate-pulse"></div>
+                    <div className="h-24 w-full bg-white/5 rounded"></div>
+                    <div className="flex gap-2">
+                      <div className="h-8 w-1/3 bg-white/5 rounded"></div>
+                      <div className="h-8 w-1/3 bg-primary/20 rounded"></div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </ParallaxElement>
         </motion.div>
       </div>
       

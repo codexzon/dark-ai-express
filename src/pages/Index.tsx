@@ -13,7 +13,9 @@ import Footer from '@/components/Footer';
 import FaqSection from '@/components/FaqSection';
 import PortfolioSection from '@/components/PortfolioSection';
 import StickySections from '@/components/StickySections';
+import ThreeJsBackground from '@/components/ThreeJsBackground';
 import { LocomotiveScrollProvider } from '@/context/LocomotiveScrollContext';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 const Index = () => {
   useEffect(() => {
@@ -41,6 +43,7 @@ const Index = () => {
   return (
     <LocomotiveScrollProvider>
       <div className="min-h-screen w-full" data-scroll-container>
+        <ThreeJsBackground />
         <Navbar />
         <main>
           <HeroSection />
