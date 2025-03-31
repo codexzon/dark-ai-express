@@ -9,48 +9,52 @@ const PricingSection = () => {
   const plans = [
     {
       name: "Starter",
-      price: annual ? 100 : 10,
+      price: annual ? 600 : 60,
       period: annual ? "/year" : "/month",
-      description: "Perfect for individuals and small projects",
+      description: "Perfect for small businesses and startups",
       features: [
-        "5,000 API calls per month",
-        "3 AI models",
-        "Basic analytics",
-        "Email support",
-        "1 user"
+        "Professional website development",
+        "Mobile responsive design",
+        "Basic SEO optimization",
+        "Content management system",
+        "5 pages included",
+        "1 month support"
       ],
       cta: "Get Started",
       popular: false
     },
     {
       name: "Premium",
-      price: annual ? 200 : 20,
+      price: annual ? 800 : 80,
       period: annual ? "/year" : "/month",
       description: "Ideal for growing businesses and teams",
       features: [
-        "50,000 API calls per month",
-        "All AI models",
-        "Advanced analytics",
-        "Priority support",
-        "5 team members",
-        "Custom integrations"
+        "Advanced website development",
+        "Mobile app development (iOS/Android)",
+        "Advanced SEO & analytics",
+        "E-commerce functionality",
+        "Up to 15 pages",
+        "Social media integration",
+        "3 months support"
       ],
       cta: "Start Free Trial",
       popular: true
     },
     {
       name: "Business",
-      price: annual ? 300 : 30,
+      price: annual ? 1500 : 150,
       period: annual ? "/year" : "/month",
       description: "For large organizations with advanced needs",
       features: [
-        "Unlimited API calls",
-        "All AI models + early access",
-        "Enterprise analytics",
-        "24/7 dedicated support",
-        "Unlimited team members",
-        "Custom development",
-        "SLA guarantees"
+        "Enterprise web solutions",
+        "Custom app development",
+        "AI integration capabilities",
+        "Advanced security features",
+        "Unlimited pages",
+        "API development & integration",
+        "Database development",
+        "1 year dedicated support",
+        "Monthly performance reports"
       ],
       cta: "Contact Sales",
       popular: false
@@ -70,7 +74,7 @@ const PricingSection = () => {
             Our Pricing Plan
           </h2>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto mb-8">
-            Choose the perfect plan for your needs. All plans include a 14-day free trial.
+            Choose the perfect web development, app development, and IT services plan for your needs. All plans include a 14-day free trial.
           </p>
           
           {/* Toggle */}
