@@ -8,6 +8,7 @@ import { auth } from '@/lib/firebaseConfig';
 import { onAuthStateChanged } from 'firebase/auth';
 import AuthModal from './auth/AuthModal';
 import Logout from './auth/Logout';
+import { motion } from 'framer-motion';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -40,6 +41,7 @@ const Navbar = () => {
     { name: 'Home', href: '#hero' },
     { name: 'About', href: '#about' },
     { name: 'Services', href: '#services' },
+    { name: 'What We Do', href: '#what-we-do' },
     { name: 'Portfolio', href: '#portfolio' },
     { name: 'Testimonials', href: '#testimonials' },
     { name: 'Blog', href: '#blog' },
@@ -47,39 +49,70 @@ const Navbar = () => {
     { name: 'FAQ', href: '#faq' },
   ];
 
+  // Animation variants
+  const navVariants = {
+    hidden: { opacity: 0, y: -20 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        duration: 0.5,
+        when: "beforeChildren",
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: -20 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.3 }
+    }
+  };
+
   return (
-    <nav 
+    <motion.nav 
+      initial="hidden"
+      animate="visible"
+      variants={navVariants}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled ? 'backdrop-blur-xl bg-background/80 shadow-md' : ''
       }`}
     >
       <div className="container px-4 sm:px-6 lg:px-8 mx-auto">
         <div className="flex items-center justify-between h-16">
-          <Logo />
+          <motion.div variants={itemVariants}>
+            <Logo />
+          </motion.div>
           
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-4">
             <ul className="flex space-x-4">
               {navLinks.map((link) => (
-                <li key={link.name}>
+                <motion.li key={link.name} variants={itemVariants}>
                   <a 
                     href={link.href} 
                     className="px-3 py-2 text-sm text-gray-300 hover:text-white transition-colors duration-300"
                   >
                     {link.name}
                   </a>
-                </li>
+                </motion.li>
               ))}
-              <li>
+              <motion.li variants={itemVariants}>
                 <Link 
                   to="/auth" 
                   className="px-3 py-2 text-sm text-gray-300 hover:text-white transition-colors duration-300"
                 >
                   Authentication
                 </Link>
-              </li>
+              </motion.li>
             </ul>
-            <div className="flex items-center gap-2 ml-4">
+            <motion.div 
+              variants={itemVariants}
+              className="flex items-center gap-2 ml-4"
+            >
               {user ? (
                 <>
                   <span className="text-sm text-gray-300 mr-2">Hi, {user.email.split('@')[0]}</span>
@@ -110,11 +143,11 @@ const Navbar = () => {
                   />
                 </>
               )}
-            </div>
+            </motion.div>
           </div>
           
           {/* Mobile Menu Button */}
-          <div className="md:hidden">
+          <motion.div className="md:hidden" variants={itemVariants}>
             <button
               type="button"
               className="text-gray-300 hover:text-white"
@@ -122,32 +155,52 @@ const Navbar = () => {
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
-          </div>
+          </motion.div>
         </div>
       </div>
       
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="md:hidden neo-blur absolute top-16 left-0 right-0 z-50 animate-fade-in">
+        <motion.div 
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: 'auto' }}
+          exit={{ opacity: 0, height: 0 }}
+          transition={{ duration: 0.3 }}
+          className="md:hidden neo-blur absolute top-16 left-0 right-0 z-50"
+        >
           <div className="px-4 pt-2 pb-4 space-y-1">
-            {navLinks.map((link) => (
-              <a
+            {navLinks.map((link, index) => (
+              <motion.a
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.05 }}
                 key={link.name}
                 href={link.href}
                 className="block px-3 py-2 text-base text-gray-300 hover:text-white hover:bg-primary/10 rounded-md"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {link.name}
-              </a>
+              </motion.a>
             ))}
-            <Link
-              to="/auth"
-              className="block px-3 py-2 text-base text-gray-300 hover:text-white hover:bg-primary/10 rounded-md"
-              onClick={() => setIsMenuOpen(false)}
+            <motion.div
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: navLinks.length * 0.05 }}
             >
-              Authentication
-            </Link>
-            <div className="flex flex-col gap-2 pt-2">
+              <Link
+                to="/auth"
+                className="block px-3 py-2 text-base text-gray-300 hover:text-white hover:bg-primary/10 rounded-md"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Authentication
+              </Link>
+            </motion.div>
+            <motion.div 
+              className="flex flex-col gap-2 pt-2"
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: (navLinks.length + 1) * 0.05 }}
+            >
               {user ? (
                 <>
                   <span className="px-3 py-2 text-sm text-gray-300">Hi, {user.email.split('@')[0]}</span>
@@ -178,11 +231,11 @@ const Navbar = () => {
                   />
                 </>
               )}
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       )}
-    </nav>
+    </motion.nav>
   );
 };
 

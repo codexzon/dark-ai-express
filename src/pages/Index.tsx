@@ -12,6 +12,8 @@ import CtaSection from '@/components/CtaSection';
 import Footer from '@/components/Footer';
 import FaqSection from '@/components/FaqSection';
 import PortfolioSection from '@/components/PortfolioSection';
+import StickySections from '@/components/StickySections';
+import { LocomotiveScrollProvider } from '@/context/LocomotiveScrollContext';
 
 const Index = () => {
   useEffect(() => {
@@ -37,22 +39,25 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen w-full">
-      <Navbar />
-      <main>
-        <HeroSection />
-        <BusinessSection />
-        <FeaturesSection />
-        <PortfolioSection />
-        <TestimonialsSection />
-        <PricingSection />
-        <FaqSection />
-        <BlogSection />
-        <ContactSection />
-        <CtaSection />
-      </main>
-      <Footer />
-    </div>
+    <LocomotiveScrollProvider>
+      <div className="min-h-screen w-full" data-scroll-container>
+        <Navbar />
+        <main>
+          <HeroSection />
+          <BusinessSection />
+          <FeaturesSection />
+          <StickySections />
+          <PortfolioSection />
+          <TestimonialsSection />
+          <PricingSection />
+          <FaqSection />
+          <BlogSection />
+          <ContactSection />
+          <CtaSection />
+        </main>
+        <Footer />
+      </div>
+    </LocomotiveScrollProvider>
   );
 };
 
